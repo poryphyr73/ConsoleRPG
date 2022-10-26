@@ -2,15 +2,17 @@ import java.util.Random;
 
 public class Weapon extends Item
 {
+    private String name;
     private $ItemType type = $ItemType.Weapon;
     private int damage;
     private int accuracy;
     private int durability;
     Random r = new Random();
 
-    public Weapon(int damage, int accuracy, int durability)
+    public Weapon(String name, int damage, int accuracy, int durability)
     {
         super();
+        this.name = name;
         this.damage = damage;
         this.accuracy = accuracy;
         this.durability = durability;
@@ -46,5 +48,10 @@ public class Weapon extends Item
     public void setDamage(int i)
     {
         damage = i;
+    }
+
+    public String toString()
+    {
+        return "The legendary weapon, " + name + "! It deals " + damage + " damage per accurate swing (" + accuracy + "% accuracy)";
     }
 }
