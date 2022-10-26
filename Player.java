@@ -1,4 +1,7 @@
 import java.util.HashMap;
+import java.util.spi.ResourceBundleControlProvider;
+
+import javax.swing.plaf.synth.Region;
 
 public class Player 
 {
@@ -7,7 +10,7 @@ public class Player
     private int statPoints;
     private int exp, level;
     private int[] expToLevel = new int[10];
-    private HashMap<Integer, Item> inventory = new HashMap<Integer, Item>();
+    private HashMap<Item, Integer> inventory = new HashMap<Item, Integer>();
     private int[] skills = new int[1]; 
     private String[] skillsNames = new String[1];
 
@@ -28,15 +31,94 @@ public class Player
         System.out.println("\n");
     }
 
-    private void takeDamage(int damage)
+    //#region GETTERS
+
+    public String getName()
     {
-        health -= damage;
-        if(health <= 0) Manager.setNewState($GameState.BATTLE_LOSS);
+        return name;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
     public int getStatPoints()
     {
         return statPoints;
+    }
+
+    public int getExp()
+    {
+        return exp;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public int getExpToLevel()
+    {
+        return expToLevel[level];
+    }
+
+    public boolean hasItem(Item cur)
+    {
+        return inventory.containsKey(cur);
+    }
+
+    public int getNumberItems(Item cur)
+    {
+        return inventory.get(cur);
+    }
+
+    public String getInventory()
+    {
+        String inv = "YOUR CURRENT INVENTORY:\n";
+
+        for(int i = 0; i < inventory.size(); i++)
+        {
+            inv += "\tITEM: " + inventory.keySet().toArray()[i];
+            inv += ", VALUE: " + inventory.entrySet().toArray()[i];
+            inv += "\n";
+        }
+
+        return inv;
+    }
+
+    public String getStatName(int i)
+    {
+        return skillsNames[i];
+    }
+
+    public int getStatValue(int i)
+    {
+        return skills[i];
+    }
+
+    //#endregion GETTERS
+
+    //#region SETTERS
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    //#endregion SETTERS
+
+    //#region MODIFIERS
+
+    public void changeHealth(int k)
+    {
+        health += k;
+        if(health <= 0) Manager.setNewState($GameState.BATTLE_LOSS);
     }
 
     public void addStatPoints(int i)
@@ -53,13 +135,5 @@ public class Player
         }
     }
 
-    public String getStatName(int i)
-    {
-        return skillsNames[i];
-    }
-
-    public int getStatValue(int i)
-    {
-        return skills[i];
-    }
+    //#endregion MODIFIERS
 }

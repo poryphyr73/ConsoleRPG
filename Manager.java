@@ -1,6 +1,7 @@
 import java.lang.Thread.State;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.jar.Attributes.Name;
 
 import javax.swing.plaf.SeparatorUI;
 
@@ -11,11 +12,14 @@ public class Manager
     private static Scanner kb;
     private static Class[] enemyTypes = { Goblin.class };
     private static Random r = new Random();
+    private static Enemy currentEnemy;
 
     public static void main(String[] args)
     {
         setup();
         createCharacter();
+
+        randomEncounter();
     }
 
     private static void setup()
@@ -26,7 +30,11 @@ public class Manager
 
     private static void createCharacter()
     {
-        System.out.println("█▀▀ █▀█ █▀▀ ▄▀█ ▀█▀ █▀▀   █▄█ █▀█ █ █ █▀█   █▀▀ █ █ ▄▀█ █▀█ ▄▀█ █▀▀ ▀█▀ █▀▀ █▀█\n█▄▄ █▀▄ ██▄ █▀█  █  ██▄    █  █▄█ █▄█ █▀▄   █▄▄ █▀█ █▀█ █▀▄ █▀█ █▄▄  █  ██▄ █▀▄");
+        System.out.println("█▀▀ █▀█ █▀▀ ▄▀█ ▀█▀ █▀▀   █▄█ █▀█ █ █ █▀█   █▀▀ █ █ ▄▀█ █▀█ ▄▀█ █▀▀ ▀█▀ █▀▀ █▀█\n█▄▄ █▀▄ ██▄ █▀█  █  ██▄    █  █▄█ █▄█ █▀▄   █▄▄ █▀█ █▀█ █▀▄ █▀█ █▄▄  █  ██▄ █▀▄\n");
+        System.out.print("WHAT IS YOUR NAME? ");
+        player.setName(kb.nextLine());
+        System.out.println("\nWELCOME TO THE DUNGEON " + (player.getName()).toUpperCase());
+        
         while(player.getStatPoints() > 0)
         {
             System.out.println("\n====================================================================\n\nADD A NEW STAT POINT TO WHICH STAT? (INTEGER, CURRENT POINTS: " + player.getStatPoints() + "):");
@@ -40,12 +48,15 @@ public class Manager
             if(stat <= 1) player.incrementStat(stat - 1);
             else System.out.println("INVALID STAT, TRY AGAIN");
         }
+
+        System.out.println("\n====================================================================\n");
     }
 
     private static void randomEncounter()
     {
-        Class enemyClass = enemyTypes[r.nextInt(enemyTypes.length - 1)];
-        System.out.println("YOU ENCOUNTER A WILD " + enemyClass.getName());
+        int i = r.nextInt(enemyTypes.length);
+        Class enemyClass = enemyTypes[i];
+        System.out.println("YOU ENCOUNTER A WILD " + (enemyClass.getName()).toUpperCase());
     }
 
     public static void destroyItem(Item c)
