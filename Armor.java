@@ -1,12 +1,12 @@
 public class Armor extends Item
 {
     private $ItemType type = $ItemType.Armor;
-    private int blockableDamage;
+    private int armorClass;
     private int durability;
 
-    public Armor(int blockableDamage, int durability)
+    public Armor(int armorClass, int durability)
     {
-        this.blockableDamage = blockableDamage;
+        this.armorClass = armorClass;
         this.durability = durability;
     }
 
@@ -14,8 +14,7 @@ public class Armor extends Item
     {
         durability--;
         if(durability <= 0) Manager.destroyItem(this);
-        return blockableDamage;
+        System.out.println("YOUR ARMOR BROKE ON IMPACT. NO DEFENSE");
+        return armorClass;
     }
-
-    
 }

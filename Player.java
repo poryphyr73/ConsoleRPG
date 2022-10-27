@@ -1,7 +1,4 @@
 import java.util.HashMap;
-import java.util.spi.ResourceBundleControlProvider;
-
-import javax.swing.plaf.synth.Region;
 
 public class Player 
 {
@@ -11,17 +8,19 @@ public class Player
     private int exp, level;
     private int[] expToLevel = new int[10];
     private HashMap<Item, Integer> inventory = new HashMap<Item, Integer>();
-    private int[] skills = new int[1]; 
-    private String[] skillsNames = new String[1];
-
+    private int coins;
+    private String[] skillsNames = { "Strength", "Wisdom" };
+    private int[] skills = new int[skillsNames.length]; 
+    private Armor armorEquipped;
+    private Weapon weaponEquipped;
+    
     public Player()
     {
         maxHealth = 10;
         health = maxHealth;
         statPoints = 10;
 
-        skills[0] = 10;
-        skillsNames[0] = "STRENGTH";
+        for (int i = 0; i < skillsNames.length; i++) skills[i] = 10;
 
         System.out.print("Your current max health: " + maxHealth + ", Your stats: ");
         for(int i = 0; i < skills.length; i++)
@@ -100,6 +99,17 @@ public class Player
     public int getStatValue(int i)
     {
         return skills[i];
+    }
+
+    public String[] getStatsArray()
+    {
+        return skillsNames;
+    }
+
+    public int getArmorClass()
+    {
+        if(armorEquipped != null) return armorEquipped.defend();
+        else return 0;
     }
 
     //#endregion GETTERS

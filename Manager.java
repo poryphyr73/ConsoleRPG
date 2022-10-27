@@ -1,16 +1,12 @@
-import java.lang.Thread.State;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.jar.Attributes.Name;
-
-import javax.swing.plaf.SeparatorUI;
 
 public class Manager
 {
     private static $GameState state = $GameState.CREATE;
     private static Player player;
     private static Scanner kb;
-    private static Class[] enemyTypes = { Goblin.class };
+    private static Enemy[] enemyTypes = { new Goblin() };
     private static Random r = new Random();
     private static Enemy currentEnemy;
 
@@ -38,14 +34,14 @@ public class Manager
         while(player.getStatPoints() > 0)
         {
             System.out.println("\n====================================================================\n\nADD A NEW STAT POINT TO WHICH STAT? (INTEGER, CURRENT POINTS: " + player.getStatPoints() + "):");
-            for(int i = 0; i < 1; i++)
+            for(int i = 0; i < player.getStatsArray().length; i++)
             {
                 System.out.println(player.getStatName(i) + " (" + (i + 1) + "), CURRENT: " + player.getStatValue(i));
             }
 
             int stat = kb.nextInt();
 
-            if(stat <= 1) player.incrementStat(stat - 1);
+            if(stat <= player.getStatsArray().length) player.incrementStat(stat - 1);
             else System.out.println("INVALID STAT, TRY AGAIN");
         }
 
@@ -55,8 +51,10 @@ public class Manager
     private static void randomEncounter()
     {
         int i = r.nextInt(enemyTypes.length);
-        Class enemyClass = enemyTypes[i];
-        System.out.println("YOU ENCOUNTER A WILD " + (enemyClass.getName()).toUpperCase());
+        Enemy cur = enemyTypes[i];
+        cur.reset();
+        String enemyClassName = cur.getClass().getName();
+        System.out.println("YOU ENCOUNTER A WILD " + enemyClassName.toUpperCase());
     }
 
     public static void destroyItem(Item c)
@@ -67,5 +65,10 @@ public class Manager
     public static void setNewState($GameState newState)
     {
         state = newState;
+    }
+
+    public static Player getPlayerAddress()
+    {
+        return player;
     }
 }
