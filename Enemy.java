@@ -1,4 +1,4 @@
-public class Enemy 
+public abstract class Enemy 
 {
     private int maxHealth, health, expOnKill, attackDamage, rawDefense;
     private int itemRarity;
@@ -50,5 +50,24 @@ public class Enemy
 
     //#endregion
 
+    //#region Gameplay Methods
 
+    public abstract int primaryAttack();
+
+    public abstract int secondaryAttack();
+
+    public abstract String getIcon();
+
+    public abstract void takeDamage(int k);
+
+    public abstract void heal();
+
+    public void changeHealth(int k)
+    {
+        health += k;
+        if(health <= 0) Manager.setNewState($GameState.BATTLE_WIN);
+        if(health >= maxHealth) health = maxHealth;
+    }
+
+    //#endregion
 }

@@ -1,9 +1,8 @@
 public enum $GameState
 {
     CREATE,
-    BATTLE_ENTER,
-    PLAYER_TURN,
-    ENEMY_TURN,
+    DUNGEON_ENTER,
+    BATTLE,
     BATTLE_WIN,
     BATTLE_LOSS
 }

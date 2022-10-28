@@ -22,7 +22,7 @@ public class Weapon extends Item
     {
         durability--;
         if(durability <= 0) Manager.destroyItem(this);
-        return damage * (accuracy >= r.nextInt(100) ? 0 : 1);
+        return damage * (accuracy >= r.nextInt(100) ? 1 : 0);
     }
 
     public $ItemType getType()
