@@ -95,6 +95,7 @@ public class Manager
             case 4:
                 doPlayerFlee();
         }
+        if(selection > 4 || selection == 0) playerTurn();
     }
 
     private static void enemyTurn()

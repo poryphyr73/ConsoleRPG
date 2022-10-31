@@ -6,6 +6,8 @@ public abstract class Enemy
 
     //enchanted hat (no AC, ench), rusty iron sword, curse of binding armor, 
 
+    // "Massager" weapon. It is a big dildo. Stuns enemy from pleasure
+
     public Enemy(int maxHealth, int expOnKill, int attackDamage, int rawDefense, int itemRarity)
     {
         this.maxHealth = maxHealth;
