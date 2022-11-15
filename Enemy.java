@@ -2,11 +2,7 @@ public abstract class Enemy
 {
     private int maxHealth, health, expOnKill, attackDamage, rawDefense;
     private int itemRarity;
-    private Item[] potentialDrops;
-
-    //enchanted hat (no AC, ench), rusty iron sword, curse of binding armor, 
-
-    // "Massager" weapon. It is a big dildo. Stuns enemy from pleasure
+    private Item[] potentialDrops = RealItems.getItems();
 
     public Enemy(int maxHealth, int expOnKill, int attackDamage, int rawDefense, int itemRarity)
     {

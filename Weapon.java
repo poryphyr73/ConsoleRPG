@@ -3,11 +3,19 @@ import java.util.Random;
 public class Weapon extends Item
 {
     private String name;
-    private $ItemType type = $ItemType.Weapon;
     private int damage;
     private int accuracy;
     private int durability;
     Random r = new Random();
+
+    public Weapon(String name, int damage, int accuracy, int durability, int types)
+    {
+        super(types);
+        this.name = name;
+        this.damage = damage;
+        this.accuracy = accuracy;
+        this.durability = durability;
+    }
 
     public Weapon(String name, int damage, int accuracy, int durability)
     {
@@ -23,11 +31,6 @@ public class Weapon extends Item
         durability--;
         if(durability <= 0) Manager.destroyItem(this);
         return damage * (accuracy >= r.nextInt(100) ? 1 : 0);
-    }
-
-    public $ItemType getType()
-    {
-        return type;
     }
 
     public int getRawDamage()
@@ -52,6 +55,6 @@ public class Weapon extends Item
 
     public String toString()
     {
-        return "The legendary weapon, " + name + "! It deals " + damage + " damage per accurate swing (" + accuracy + "% accuracy)";
+        return ("The legendary weapon, " + name + "! It deals " + damage + " damage per hit (" + accuracy + "% accuracy). it has an elemental buff of " + super.toString()).toUpperCase();
     }
 }

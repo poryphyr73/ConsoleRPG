@@ -1,8 +1,14 @@
 public class Consumable extends Item
 {
-    private $ItemType type = $ItemType.Consumable;
     private int healthBoost;
     private String name;
+
+    public Consumable(String name, int healthBoost, int types)
+    {
+        super(types);
+        this.name = name;
+        this.healthBoost = healthBoost;
+    }
 
     public Consumable(String name, int healthBoost)
     {
