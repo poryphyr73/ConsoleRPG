@@ -32,6 +32,36 @@ public class Armor extends Item
         return armorClass;
     }
 
+    //#region Elements
+
+    public int fire(int base)
+    {
+        System.out.println("Your weapon burns the enemy for an additional " + (base / 2) + " damage!");
+        return (base / 2);
+    }
+
+    public boolean freeze()
+    {
+
+    }
+
+    public boolean shock()
+    {
+
+    }
+
+    public boolean poison()
+    {
+
+    }
+
+    public boolean blow()
+    {
+        
+    }
+
+    //#endregion
+
     public String toString()
     {
         return ("a " + name + " with and armor class of " + armorClass + "! it can take " + durability + " more hits and has resistance to " + super.toString()).toUpperCase();

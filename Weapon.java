@@ -26,6 +26,8 @@ public class Weapon extends Item
         this.durability = durability;
     }
 
+    //#region Getters
+
     public int getDamage()
     {
         durability--;
@@ -48,10 +50,16 @@ public class Weapon extends Item
         return durability;
     }
 
+    //#endregion
+
+    //#region Setters
+
     public void setDamage(int i)
     {
         damage = i;
     }
+
+    //#endregion
 
     public String toString()
     {

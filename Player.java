@@ -1,4 +1,6 @@
+import java.security.Key;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Player 
@@ -15,6 +17,7 @@ public class Player
     private Armor armorEquipped;
     private Weapon weaponEquipped;
     private Random r = new Random();
+    private HashMap<Integer, Integer> activeEffects = new HashMap<Integer, Integer>(); // a rep type, b rep #turns; if b is -1 then its an armor buff (static)
     
     public Player()
     {
@@ -128,6 +131,11 @@ public class Player
         return "1. [ ATTACK ]\t2. [ HEAL ]\n3. [ EQUIP ]\t4. [ FLEE ]\n";
     }
 
+    public boolean hasDefenseAgainst(int i)
+    {
+        return activeEffects.containsKey(i);
+    }
+
     //#endregion GETTERS
 
     //#region SETTERS
@@ -158,6 +166,15 @@ public class Player
         {
             skills[i]++;
             statPoints--;
+        }
+    }
+
+    public void updateModifiers()
+    {
+        for(int i = 0; i < activeEffects.size(); i++)
+        {
+            if(activeEffects.get(i) > 0) activeEffects.put(i, activeEffects.get(i) - 1);
+            if(activeEffects.get(i) == 0) activeEffects.remove(i);
         }
     }
 
